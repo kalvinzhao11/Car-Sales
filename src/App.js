@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 
 import Header from './components/Header';
@@ -8,6 +8,9 @@ import Total from './components/Total';
 
 const App = (props) => {
 
+  // useEffect(()=>{
+
+  // },[props.car])
   return (
     <div className="boxes">
       <div className="box">
@@ -15,7 +18,7 @@ const App = (props) => {
         <AddedFeatures />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
+        <AdditionalFeatures/>
         <Total />
       </div>
     </div>

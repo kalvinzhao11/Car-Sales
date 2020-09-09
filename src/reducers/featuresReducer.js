@@ -16,5 +16,36 @@ export const initialState = {
 }
 
 export const featuresReducer = (state = initialState, action) => {
-    return state
+    switch (action.type){
+        case 'ADD_FEATURES':
+            let feature = state.car.features.filter(item => {
+                return item.id === action.payload.id
+            })
+            if (feature.length === 0){
+                return {
+                    ...state, car: {...state.car, features: [...state.car.features, action.payload]}, additionalPrice: state.additionalPrice + action.payload.price
+                }
+            } else {
+                return state
+            }
+        case 'DELETE_FEATURES':
+            let deleteFeature = state.car.features.filter(item => {
+                return item.id !== action.payload.id
+            })
+            console.log(deleteFeature)
+            // let deleteFeature = state.car.features.indexOf(action.payload)
+            // console.log('find index', deleteFeature)
+            // console.log('splice',state.car.features.splice(deleteFeature))
+            // console.log('array',state.car.features)
+            if (deleteFeature.length !== state.car.features){
+                return {
+                    ...state, car: {...state.car, features: deleteFeature}, additionalPrice: state.additionalPrice - action.payload.price
+                }
+            } else {
+                return state
+            }
+        default:
+            return state
+        }
+    
 }
